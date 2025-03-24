@@ -28,6 +28,49 @@
     
     <!-- 메뉴바 -->
     <jsp:include page="../include/header.jsp" />
+    
+    <script>
+    	<!--
+    		사용자가 아이디를 입력하는 input요소에 무언가 값을 입력할 때 마다
+    		아이디가 중복인지 검사해서 출력해주기
+    	-->
+    	const inputEl = document.querySelector('#signup-form > #userId');
+    	
+    	inputEl.addEventListener('keyup', () => {
+    		
+    		const inputValue = inputEl.value;
+    		
+    		if(inputValue.length >= 5){
+    			
+    			$.ajax({
+    				url : `idcheck?memberId=\${inputValue}`,
+    				type : 'GET',
+    				success : function(result){
+    					
+    					// NNNNN / NNNNY
+    					// 없을때 / 있을때
+    					const responseData = result.substr(4);
+    					
+    					if(responseData === 'Y'){
+    						$('#check-result').show()
+    										  .css('color', 'crimson')
+    										  .text('사용할 수 없는 아이디입니다.');
+    						
+    					} else{
+    						$('#check-result').show()
+											  .css('color', 'lightgreen')
+											  .text('사용 가능한 아이디입니다.');
+				    		
+    					}
+    				}
+    			});
+    		}
+    		
+    	}
+    	
+    	console.log(inputEl);
+    	
+    </script>
 
     <div class="content">
         <br><br>

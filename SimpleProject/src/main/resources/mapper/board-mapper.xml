@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.spring.model.mapper.BoardMapper">
+	
+	<insert id="insertBoard"
+			parameterType="com.kh.spring.model.dto.BoardDTO">
+		INSERT
+		  INTO
+		  		TB_SPRING_BOARD
+		  		(
+		  		BOARD_TITLE
+		  	  , BOARD_CONTENT
+		  	  , BOARD_WRITER
+		  	  , CHANGE_NAME
+		  		)
+		VALUES
+				(
+				#{boardTitle}
+			  , #{boardContent}
+			  , #{boardWriter}
+			  , #{changeName}
+				)
+	</insert>
+	
+	<select id="searchedCount" parameterType="hashmap" resultType="_int">
+		SELECT
+				COUNT(*)
+		  FROM
+		  		TB_SPRING_BOARD
+		 WHERE
+		 		STATUS = 'Y'
+		<if test="condition == 'writer'">
+		   AND
+		   		BOARD_WRITER
+		</if>
+		<if test="condition == 'title'">
+		   AND
+		   		BOARD_TITLE LIKE
+		</if>
+		<if test="condition == 'content'">
+		   AND
+		   		BOARD_CONTENT
+		</if>
+				LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="selectSearchList" parameterType="hashmap"
+			resultType="com.kh.spring.board.model.dto.BoardDTO">
+		<include refid="boardColumn" />
+			FROM
+				 TB_SPRING_BOARD
+		   WHERE
+		   		 STATUS = 'Y'
+		<choose>
+			<when test="condition == 'wiriter'">
+				AND BOARD_WRITER
+			</when>
+			<when test="condition == 'content">
+				AND BOARD_CONTENT
+			</when>
+			<otherwise>
+				ANDBOARD_TITLE
+			</otherwise>
+		</choose>
+				LIKE '%' || #{keyword} || '%'
+		  ORDER
+		  	 BY
+		  	 	
+	</select>
+</mapper>

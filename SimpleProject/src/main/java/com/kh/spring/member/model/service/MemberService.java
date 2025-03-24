@@ -25,6 +25,8 @@ public interface MemberService {
 	
 	// 아이디 중복체크
 	
+	String idCheck(String memberId);
+	
 	// 2절
 	
 	// 이메일인증... 시간되면...
