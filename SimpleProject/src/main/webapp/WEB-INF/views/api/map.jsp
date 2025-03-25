@@ -11,7 +11,7 @@
 
 	<jsp:include page="../include/header.jsp" />
 	
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1123116c6124534d084ca9d1457479ce"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=서비스키"></script>
 	
 	<div id="map" style="width:500px;height:400px; margin:auto;"></div>
 	

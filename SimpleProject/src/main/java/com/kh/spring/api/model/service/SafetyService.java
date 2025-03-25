@@ -26,7 +26,7 @@ public class SafetyService {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("https://www.safetydata.go.kr/V2/api/DSSP-IF-10840");
-		sb.append("?serviceKey=00676IZ9KKI4J0NL");
+		sb.append("?serviceKey=서비스키값");
 		
 		// HttpURLConnection객체를 활용해서 API서버로 요청을 보내서 응답을 받아와야함
 		// 1. java.net.URL객체 생성 => 생성자 호출 시 인자값으로 요청할 URL을 전달
