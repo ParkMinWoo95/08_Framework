@@ -157,9 +157,57 @@
 	 	댓글 내용 : <p id="content"></p>
 	 	댓글 작성일 : <p id="date"></p>
 	 </div>
+	 
+	 <img id="board-img" />
+	 <hr>
+	 <div id="reply-area">
+	 
+	 </div>
+	 
 	
 	댓글 번호 : <input type="text" id="replyNo">
-	<button onclick="selectRply()">댓글보여주세요</button>
+	<button onclick="selectRply()">게시글 보여주세요</button>
+	
+	<script>
+		function selectReply(){
+			
+			const replyNo = document.getElementById('replyNo').value;
+			
+			$.ajax({
+				url : `study?replyNo=\${replyNo}`,
+				type : 'get',
+				success : result => {
+					console.log(result);
+					// 응답받은 데이터를 화면에 출력'
+					$('#title').text(result.boardTitle);
+					$('#wirter').text(result.boardWriter);
+					$('#content').text(result.boardContent);
+					$('#date').text(result.boardDate);
+					
+					if(result.changeName){
+						$('#board-img').attr('src', result.changeName);
+					} else {
+						$('#board-img').attr('src', "");
+					}
+					
+					const reply = result.replyList;
+					console.log(reply);
+					
+					const elements = reply.map( e = > {
+						`
+						  <label>댓글 작성자 : \${e.replyWriter}</label> |
+						  <label>댓글 내용 : \${e.replyContent}</label> |
+						  <label>작성일 : \${e.createDate}</label><br/>
+						`
+					}).join('');
+					
+					document.querySelector('#reply-area').innerHTML = elements;
+				}
+			});
+			
+		}
+	
+	</script>
 	
 	
 

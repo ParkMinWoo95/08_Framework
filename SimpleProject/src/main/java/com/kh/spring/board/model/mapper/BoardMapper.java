@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.session.RowBounds;
 
 import com.kh.spring.board.model.dto.BoardDTO;
+import com.kh.spring.reply.dto.ReplyDTO;
 
 @Mapper
 public interface BoardMapper {
@@ -32,4 +33,7 @@ public interface BoardMapper {
 	int searchedCount(Map<String, String> map);
 	
 	List<BoardDTO> selectSearchList(Map<String, String> map, RowBounds rb);
+
+	
+	int insertReply(ReplyDTO reply);
 }
