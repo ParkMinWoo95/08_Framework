@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -31,6 +32,11 @@ public class ApiSafetyController {
 	@GetMapping(value="message")
 	public String requestMessage(@RequestParam(name="pageNo") int pageNo) {
 		return safetyService.requestMessage(pageNo);
+	}
+	
+	@GetMapping("naver-shopping")
+	public String getItems(@RequestParam(name="query") String query) {
+		return safetyService.getItems(query);
 	}
 	
 }
